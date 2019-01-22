@@ -1,0 +1,33 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>myFunction</title>
+	<script>
+	var xmlhttp;
+	function loadXMLDoc(url,ulucm){
+		if (window.XMLHttpRequest) {
+			xmlhttp = new XMLHttpRequest();
+		}else{
+			xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+		}
+		xmlhttp.onreadystatechange=ulucm;
+		xmlhttp.open("GET",url,true);
+		xmlhttp.send();
+	}
+	function myFunction(){
+		loadXMLDoc("ajax_info.txt",function(){
+			if (xmlhttp.readyState==4 && xmlhttp.status==200) {
+				document.getElementById("myFunction").innerHTML=xmlhttp.responseText;
+			}
+		});
+	}
+	</script>
+</head>
+<body>
+	<!-- 回调函数 -->
+	<div id="myFunction"><h2>使用AJAX修改该文本内容</h2><button type="button" onclick="myFunction()">修改内容</button></div>
+	
+</body>
+</html>

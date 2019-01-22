@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>showHint</title>
+	<script>
+	function showHint(str){
+		var xmlhttp;
+		if (str.length==0) {
+			document.getElementById("txtHint").innerHTML="";
+			return;
+		}
+		if (window.XMLHttpRequest()) {
+			xmlhttp = new XMLHttpRequest();
+		}else{
+			xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+		}
+		xmlhttp.onreadystatechange=function(){
+			if (xmlhttp.readyState==4 && xmlhttp.status==200) {
+				document.getElementById("txtHint").innerHTML=xmlhttp.responseText;
+			}
+		}
+		xmlhttp.open("GET","2.php?q="+str,true);
+		xmlhttp.send();
+	}
+	</script>
+</head>
+<body>
+	<h2>在输入框中尝试输入字母a:</h2>
+	<p>输入姓名：<input type="text" onkeyup="showHint(this.value)"></p>
+	<p>提示信息：<span id="txtHint"></span></p>
+</body>
+</html>

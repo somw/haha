@@ -1,0 +1,14 @@
+function loadXMLDoc(dname)
+{
+	if (window.XMLHttpRequest) {
+		// IE7+,Firefox,Chrome,Opera,Safari ä¯ÀÀÆ÷Ö´ÐÐ´úÂë
+		xhttp = new XMLHttpRequest();
+	}
+	else{
+		// IE5,IE6 ä¯ÀÀÆ÷Ö´ÐÐ´úÂë
+		xhttp = new ActiveXObject("Microsoft.XMLHTTP");
+	}
+	xhttp.open("GET",dname,false);
+	xhttp.send();
+	return xhttp.responseXML;
+}

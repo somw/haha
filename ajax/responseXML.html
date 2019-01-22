@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>responseXML</title>
+	<script>
+	function loadXMLDoc(){
+		var xmlhttp;
+		var txt,i,x;
+		if (window.XMLHttpRequest) {
+			xmlhttp = new XMLHttpRequest();
+		}else{
+			xmlhttp = ActiveXObject("Microsoft.XMLHTTP");
+		}
+		xmlhttp.onreadystatechange=function(){
+			if (xmlhttp.readyState==4 && xmlhttp.status==200) {
+				xmlDoc=xmlhttp.responseXML;
+				txt="";
+				x=xmlDoc.getElementsByTagName("ARTIST");
+				for (i = 0;i<x.length ;i++) {
+					txt=txt+x[i].childNodes[0].nodeValue+"<br>";
+				}
+
+				document.getElementById("myDiv").innerHTML=txt;
+			}
+		}
+		xmlhttp.open("GET","cd_catalog.xml",true);
+		xmlhttp.send();
+	}
+	</script>
+</head>
+<body>
+	<h2>我收藏CD：</h2>
+	<div id="myDiv"><button type="button" onclick="loadXMLDoc()">点我</button></div>
+</body>
+</html>

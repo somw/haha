@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>showCustomer</title>
+	<script>
+	function showCustomer(str){
+		var xmlhttp;
+		if (str.length==0) {
+			document.getElementById("txtHint").innerHTML="";
+			return;
+		}
+		if (window.XMLHttpRequest()) {
+			xmlhttp = new XMLHttpRequest();
+		}else{
+			xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+		}
+		xmlhttp.onreadystatechange=function(){
+			if (xmlhttp.readyState==4 && xmlhttp.status==200) {
+				document.getElementById("txtHint").innerHTML=xmlhttp.responseText;
+			}
+		}
+		xmlhttp.open("GET","getcustomer.php?q="+str,true);
+		xmlhttp.send();
+	}
+	</script>
+</head>
+<body>
+	<form action="">
+	<select name="customers" onchange="showCustomer(this.value)" style="font-family: Verdana,Arial,Helvetica,sans_serif;">
+		<option value="">请选择一个网站</option>
+		<option value="APPLE">Apple Computer,Inc.</option>
+		<option value="BAIDU">BAIDU,Inc.</option>
+		<option value="Canon">Canon USA,Inc.</option>
+		<option value="Google">Google,Inc.</option>
+		<option value="Nokia">Nokia Corporation.</option>
+		<option value="SONY">sony Corporation of America.</option>
+	</select>
+	</form>
+	<div id="txtHint">客户信息将显示在这...</div>
+</body>
+</html>
